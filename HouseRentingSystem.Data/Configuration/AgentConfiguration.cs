@@ -18,7 +18,7 @@ namespace HouseRentingSystem.Data.Configuration
         {
           //  builder.HasData(SeedCategories());
         }
-
+/*
         private IEnumerable<Agent> SeedCategories()
         {
             return new Agent[]
@@ -37,5 +37,6 @@ namespace HouseRentingSystem.Data.Configuration
                 }
             };
         }
+        */
     }
 }
