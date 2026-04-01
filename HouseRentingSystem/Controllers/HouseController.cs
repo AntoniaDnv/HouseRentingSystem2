@@ -1,5 +1,8 @@
-﻿using HouseRentingSystem.Models;
+﻿using HouseRentingSystem.Data;
+using HouseRentingSystem.Data.Data.Entities;
+using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -28,12 +31,59 @@ namespace HouseRentingSystem.Controllers
 				ImageUrl = @"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO3CW-ztFIRbSl2yNpP7LtSBEkZ92ZOaPeDg&s"
 			}
 		};
-		public IActionResult AllHouses()
-		{
-			return View(houses);
-		}
+        private readonly HouseRentingDbContext context;
+        public HouseController(HouseRentingDbContext context)
+        {
+            this.context = context;
+        }
+        public async Task<IActionResult> AllHouses()
+        {
+            var houses = await context.Houses.ToListAsync();
+            return View(houses);
+        }
 
-		public IActionResult Details(int id)
+        public async Task<IActionResult> HouseById(int id)
+        {
+            var house = await context.Houses
+                .FirstOrDefaultAsync(h => h.Id == id);
+
+            if (house == null)
+            {
+                return NotFound();
+            }
+
+            return View(house);
+        }
+
+        [HttpGet]
+        public IActionResult CreateHouse()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateHouse(CreateHouseViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var house = new House()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Address = model.Address,
+                ImageUrl = model.ImageUrl
+            };
+
+            await context.Houses.AddAsync(house);
+            await context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(AllHouses));
+        }
+
+        public IActionResult Details(int id)
 		{
 			return View(houses.FirstOrDefault(h => h.Id == id));
 		}
