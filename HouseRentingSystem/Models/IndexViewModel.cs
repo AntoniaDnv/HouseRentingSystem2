@@ -2,10 +2,10 @@
 {
     public class IndexViewModel
     {
-        public int  TotalHouses { get; set; }
-        public int TotalRents { get; set; }
+        //public int  TotalHouses { get; set; }
+        //public int TotalRents { get; set; }
 
-        public IEnumerable<HouseIndexViewModel> Houses { get; init; }
-        = new List<HouseIndexViewModel>();
+        //public IEnumerable<HouseIndexViewModel> Houses { get; init; }
+        //= new List<HouseIndexViewModel>();
     }
 }

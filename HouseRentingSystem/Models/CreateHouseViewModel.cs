@@ -15,6 +15,7 @@ namespace HouseRentingSystem.Models
         [Required]
         [Range(0, 1000000)]
         public decimal Price { get; set; }
+        public List<string> Categories { get; set; }
 
         [Required]
         [StringLength(200)]

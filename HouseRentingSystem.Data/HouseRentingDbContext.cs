@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace HouseRentingSystem.Data
 {
     public class HouseRentingDbContext :IdentityDbContext<ApplicationUser>
-    {
+    {   
         public HouseRentingDbContext
             (DbContextOptions<HouseRentingDbContext> options)
             : base(options)
@@ -20,7 +20,6 @@ namespace HouseRentingSystem.Data
         }
         public DbSet<House> Houses { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
-        public DbSet<Agent> Agents { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

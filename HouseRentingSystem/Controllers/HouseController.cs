@@ -21,7 +21,7 @@ namespace HouseRentingSystem.Controllers
                 .Select(h => new HouseViewModel()
                 {
                     Id = h.Id,
-                    Name = h.Title, 
+                    Name = h.Title,
                     Address = h.Address,
                     ImageUrl = h.ImageUrl
                 })
@@ -77,6 +77,23 @@ namespace HouseRentingSystem.Controllers
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(AllHouses));
+        }
+        public async Task<IActionResult> Details(int id)
+        {
+            var house = context.Houses
+            .AsNoTracking()
+            .FirstOrDefault(h => h.Id == id);
+            var model = new HouseDetailViewModel()
+            {
+                Id = house.Id,
+                Address = house.Address,
+                Description = house.Description,
+                CreatedBy = house.Agent.UserName,
+                ImageUrl = house.ImageUrl,
+                Price = house.PricePerMonth,
+                Name = house.Title
+            };
+            return View(model);
         }
     }
 }

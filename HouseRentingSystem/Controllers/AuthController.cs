@@ -26,7 +26,7 @@ namespace HouseRentingSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model) 
         {
-            if (ModelState.IsValid == false) 
+            if (ModelState.IsValid == false) // this activates the validation attributes in a way... so it is important 
             {
                 return View(model);
             }
@@ -35,7 +35,7 @@ namespace HouseRentingSystem.Controllers
             {
                 return View(model);
             }
-            var result = await userManager.CheckPasswordAsync(user, model.Password);
+            var result = await userManager.CheckPasswordAsync(user, model.Password); // model Binding exmpl. Binding happens by name!
             if (result == true) 
             {
                 await signInManager.SignInAsync(user, model.RememberMe);
@@ -55,7 +55,7 @@ namespace HouseRentingSystem.Controllers
             {
                 return View(model);
             }
-            var user = userManager.FindByEmailAsync(model.Email);
+            var user = await userManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
                 ModelState.AddModelError("", "User already exists");

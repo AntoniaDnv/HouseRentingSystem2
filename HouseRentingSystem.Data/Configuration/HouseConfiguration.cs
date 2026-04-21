@@ -21,8 +21,14 @@ namespace HouseRentingSystem.Data.Configuration
             {
                 new House
                 {
-
-
+                    Id = 1,
+                    Title = "Test",
+                    Address = "Test",
+                    Description = "Test",
+                    ImageUrl = "Test",
+                    PricePerMonth = 1000,
+                    CategoryId = 1,
+                    AgentId = "b449b516-b53b-4659-8216-2d5dfb944db9"
                 }
             };
         }

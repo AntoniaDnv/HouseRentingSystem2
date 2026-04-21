@@ -35,8 +35,8 @@ namespace HouseRentingSystem.Data.Data.Entities
         public Category Category { get; set; }
         [Required]
         [ForeignKey(nameof(Agent))]
-        public Guid AgentId { get; set; }
-        public Agent Agent { get; set; }
+        public string AgentId { get; set; }
+        public ApplicationUser Agent { get; set; }
 
         public string? RenterId { get; set; }
         public ApplicationUser? Renter { get; set; }

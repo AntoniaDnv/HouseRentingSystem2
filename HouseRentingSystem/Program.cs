@@ -1,5 +1,6 @@
 using HouseRentingSystem.Data;
 using HouseRentingSystem.Data.Data.Entities;
+using HouseRentingSystem.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +36,7 @@ namespace HouseRentingSystem
 			builder.Services.AddControllersWithViews();
 
 			var app = builder.Build();
-
+			app.UseMiddleware<TimeCountingMiddleware>();
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
 			{
@@ -48,7 +49,18 @@ namespace HouseRentingSystem
 			app.UseStaticFiles();
 
 			app.UseRouting();
-
+			app.Use(async (context, next) =>
+			{
+				//incomming request
+				var path = context.Request.Path;
+				Console.WriteLine(path);
+				await next();
+				var statusCode = context.Response.StatusCode;
+				Console.WriteLine(statusCode);
+				//Outgoing response
+			});
+			
+			app.UseMiddleware<CustomMiddleware>();
 			app.UseAuthentication();
 			app.UseAuthorization();
 
