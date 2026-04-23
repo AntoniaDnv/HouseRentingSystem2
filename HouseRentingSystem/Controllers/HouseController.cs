@@ -95,5 +95,6 @@ namespace HouseRentingSystem.Controllers
             };
             return View(model);
         }
+       
     }
 }

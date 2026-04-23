@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "HouseRentingSystem.Data": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIROMENT": "Production"
+      }
+    }
+  }
+}
