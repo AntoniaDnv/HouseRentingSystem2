@@ -40,6 +40,8 @@ namespace HouseRentingSystem.Data.Data.Entities
 
         public string? RenterId { get; set; }
         public ApplicationUser? Renter { get; set; }
+
+        public bool IsDeleted { get; set; }
        
 
 

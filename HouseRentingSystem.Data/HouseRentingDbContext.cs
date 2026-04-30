@@ -11,7 +11,11 @@ using System.Threading.Tasks;
 namespace HouseRentingSystem.Data
 {
     public class HouseRentingDbContext :IdentityDbContext<ApplicationUser>
-    {   
+    {
+        public HouseRentingDbContext()
+        {
+            
+        }
         public HouseRentingDbContext
             (DbContextOptions<HouseRentingDbContext> options)
             : base(options)

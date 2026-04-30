@@ -13,9 +13,20 @@ namespace HouseRentingSystem.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<House> builder)
         {
-           // builder.HasData(SeedCategories());
+            builder.HasOne(h => h.Category)
+                 .WithMany(c => c.Houses)
+                 .HasForeignKey(h => h.CategoryId)
+                 .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(h => h.Agent)
+                .WithMany(a => a.Houses)
+                .HasForeignKey(h =>  h.AgentId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasData(SeedHouses());
+
+            builder.HasQueryFilter(h => h.IsDeleted == false);
+
         }
-        private IEnumerable<House> SeedCategories()
+        private IEnumerable<House> SeedHouses()
         {
             return new House[]
             {

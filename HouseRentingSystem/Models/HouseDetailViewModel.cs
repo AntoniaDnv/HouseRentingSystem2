@@ -1,4 +1,6 @@
-﻿namespace HouseRentingSystem.Models
+﻿using HouseRentingSystem.Services.DTOs;
+
+namespace HouseRentingSystem.Models
 {
     public class HouseDetailViewModel:HouseViewModel
     {

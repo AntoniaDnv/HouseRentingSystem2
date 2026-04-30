@@ -1,6 +1,8 @@
 using HouseRentingSystem.Data;
 using HouseRentingSystem.Data.Data.Entities;
 using HouseRentingSystem.Middlewares;
+using HouseRentingSystem.Services.Implementations;
+using HouseRentingSystem.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +37,7 @@ namespace HouseRentingSystem
 				opt.AccessDeniedPath = "/User/AccessDenied";
 			});
 			builder.Services.AddControllersWithViews();
-
+			builder.Services.AddScoped<IHouseService, HouseService>();
 			var app = builder.Build();
 			app.UseMiddleware<TimeCountingMiddleware>();
 			// Configure the HTTP request pipeline.
